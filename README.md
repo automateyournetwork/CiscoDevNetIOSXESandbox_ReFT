@@ -21,6 +21,12 @@ Setup you virtual environment (see requirements.txt)
 $ python3 -m venv myvenv
 ```
 
+## Setup your environment variables
+```console
+(myvenv) $ export HF_TOKEN=<your write token here>
+(myvenv) $ export WANDB_API_KEY<your wandb api key here>
+```
+
 Run the fine_tune_model.py file
 ```console
 (myvenv)$ python fine_tune_model.py

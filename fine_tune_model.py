@@ -4,10 +4,6 @@ import torch
 import requests
 import transformers
 import pyreft
-from huggingface_hub import login, HfApi, HfFolder
-
-# Log in with your personal token
-login(token="")
 
 # Citations for academic papers referenced in this implementation
 # Citation for ReFT: Representation Finetuning for Language Models
