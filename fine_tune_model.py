@@ -4,6 +4,29 @@ import torch
 import requests
 import transformers
 import pyreft
+from huggingface_hub import login
+
+# Function to load the Hugging Face API key from a file
+def load_hf_api_key(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            return file.read().strip()
+    except FileNotFoundError:
+        print("API key file not found.")
+        return None
+
+# Path to your API key file
+api_key_file_path = 'huggingfacekey.txt'
+
+# Load the API key
+hf_api_key = load_hf_api_key(api_key_file_path)
+
+if hf_api_key:
+    # Use the API key to log in
+    login(hf_api_key)
+    print("Logged in to Hugging Face Hub successfully.")
+else:
+    print("Failed to load Hugging Face API key.")
 
 # Citations for academic papers referenced in this implementation
 # Citation for ReFT: Representation Finetuning for Language Models
@@ -32,7 +55,7 @@ def load_config(file_path='show_run.txt'):
 def send_request(model, running_config):
     url = f"http://localhost:11434/api/generate"
     headers = {"Content-Type": "application/json"}
-    prompt = f"Using the following Cisco IOS XE running configuration, generate as many questions and corresponding correct answers as possible. No additional text, indices, or labels. Do not include headings or any other information. Pay close attention to interfaces, sub-interfaces, the number of sub-interfaces, IP addresses, routes, OSPF, ACLs, VRFs, and general configuration settings like NTP, VTY, banner, hostname, and domain. Use these areas of the running configuration provided as your source for the questions and correct answers. Take your time.:\n\n{running_config}"
+    prompt = f"Using the following Cisco IOS XE running configuration, generate as many questions and corresponding correct answers as possible. Make one like 'Q' and the next line 'A'. No additional text, indices, or labels. Do not include headings or any other information. Pay close attention to interfaces, sub-interfaces, the number of sub-interfaces, IP addresses, routes, OSPF, ACLs, VRFs, and general configuration settings like NTP, VTY, banner, hostname, and domain. Use these areas of the running configuration provided as your source for the questions and correct answers. Take your time.:\n\n{running_config}"
     data = {
         "model": model,
         "prompt": prompt,
@@ -95,7 +118,7 @@ def format_qa_pairs(model_response):
 
 # Example of using these functions in a workflow
 def generate_dataset():
-    # print(run_pyats_job())
+    print(run_pyats_job())
     for _ in range(500):  # Loop up to 10 times
         running_config = load_config()
         if running_config == "Configuration file not found.":
@@ -121,7 +144,7 @@ def generate_dataset():
             break
 
 # # Call the function to start the process
-#generate_dataset()
+generate_dataset()
 
 # Load the training examples from the file
 training_examples = load_training_examples()

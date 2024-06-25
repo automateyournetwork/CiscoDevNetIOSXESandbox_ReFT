@@ -2,3 +2,4 @@ tmp
 wandb
 __pycache__
 CiscoDevNetSandboxRunningConfig
+huggingfacekey.txt
