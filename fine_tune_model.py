@@ -43,19 +43,66 @@ def run_pyats_job():
     job_status = os.system("pyats run job pyats_show_run_job.py")
     return "Job executed successfully" if job_status == 0 else "Job failed"
 
-# Load the running configuration from file
 def load_config(file_path='show_run.txt'):
     try:
         with open(file_path, 'r') as file:
-            return file.read()
+            return file.read().split('!')
     except FileNotFoundError:
         return "Configuration file not found."
 
-# Function to send requests to the models
-def send_request(model, running_config):
+def send_request(model, running_config_chunk):
     url = f"http://localhost:11434/api/generate"
     headers = {"Content-Type": "application/json"}
-    prompt = f"Using the following Cisco IOS XE running configuration, generate as many questions and corresponding correct answers as possible. Make one like 'Q' and the next line 'A'. No additional text, indices, or labels. Do not include headings or any other information. Pay close attention to interfaces, sub-interfaces, the number of sub-interfaces, IP addresses, routes, OSPF, ACLs, VRFs, and general configuration settings like NTP, VTY, banner, hostname, and domain. Use these areas of the running configuration provided as your source for the questions and correct answers. Take your time.:\n\n{running_config}"
+    
+    prompt = (
+        f"The following text is from a Cisco IOS XE running configuration. Generate randomized questions about the text to form a dataset being used to fine-tune a model. "
+        f"Only generate questions if the answer can be directly found within the text provided. Do not generate questions if the answer is not explicitly present in the text. "
+        f"Include specific details from the configuration in the questions to make them clear and contextually accurate.\n\n"
+        f"For example, if you see a configuration like this:\n"
+        f"interface Loopback44\n"
+        f" description DevNet Expert\n"
+        f" no ip address\n"
+        f" shutdown\n"
+        f"Or like this:\n"
+        f"interface Loopback1\n"
+        f" description Configured via RESTCONF\n"
+        f" ip address 1.1.1.1 255.255.255.0\n"
+        f"!\n"
+        f"Make sure your questions are like this:\n"
+        f"Q: What is the description of interface Loopback44?\n"
+        f"A: DevNet Expert\n"
+        f"Q: Does interface Loopback44 have an IP address configured?\n"
+        f"A: No\n"
+        f"Q: Is interface Loopback44 shut down?\n"
+        f"A: Yes\n"
+        f"Q: What is the description of interface Loopback1?\n"
+        f"A: Configured via RESTCONF\n"
+        f"Q: What is the IP address of interface Loopback1?\n"
+        f"A: 1.1.1.1\n"
+        f"Q: What is the subnet mask of interface Loopback1?\n"
+        f"A: 255.255.255.0\n\n"
+        f"For VRF configurations like this:\n"
+        f"vrf definition CHEMICAL\n"
+        f" description CHEMICAL ENGINEERING FIRM\n"
+        f" rd 65000:2\n"
+        f" route-target export 65000:2\n"
+        f" route-target import 65000:2\n"
+        f"!\n"
+        f"Make sure your questions are like this:\n"
+        f"Q: What is the description of the VRF definition CHEMICAL?\n"
+        f"A: CHEMICAL ENGINEERING FIRM\n"
+        f"Q: What is the RD value for the VRF definition CHEMICAL?\n"
+        f"A: 65000:2\n"
+        f"Q: What is the export route-target for the VRF definition CHEMICAL?\n"
+        f"A: 65000:2\n"
+        f"Q: What is the import route-target for the VRF definition CHEMICAL?\n"
+        f"A: 65000:2\n\n"
+        f"Now generate questions and answers for the following chunk of configuration:\n"
+        f"---Running Configuration Chunk---\n{running_config_chunk}\n"
+        f"Format each question with a 'Q: ' prefix and each answer with an 'A: ' prefix on the next line. Only include questions that can be answered based on the given text. Do not include questions without answers.\n"
+    )
+
+
     data = {
         "model": model,
         "prompt": prompt,
@@ -66,27 +113,57 @@ def send_request(model, running_config):
     try:
         response = requests.post(url, headers=headers, json=data)
         response.raise_for_status()
-        return response.json().get('response', '')
+        results = response.json().get('response', '')
+        return results
     except requests.exceptions.RequestException as e:
         return f"Error: {e}"
 
-def save_to_csv(questions_answers, filename="output.csv", mode='a'):  # default to append mode
+def send_control_request(instruction):
+    url = f"http://localhost:11434/api/generate"
+    headers = {"Content-Type": "application/json"}
+    
+    prompt = prompt_no_input_template % instruction
+
+    data = {
+        "model": "llama3",  # Base model
+        "prompt": prompt,
+        "stream": False,
+        "keep_alive": 0
+    }
+
+    try:
+        response = requests.post(url, headers=headers, json=data)
+        response.raise_for_status()
+        results = response.json().get('response', '')
+        return results
+    except requests.exceptions.RequestException as e:
+        return f"Error: {e}"
+
+def save_to_csv(questions_answers, filename="output.csv", mode='a'):
+    existing_pairs = set()
+    
+    if os.path.exists(filename):
+        with open(filename, mode='r', newline='', encoding='utf-8') as file:
+            reader = csv.reader(file)
+            next(reader, None)  # Skip the header row if it exists
+            for row in reader:
+                existing_pairs.add(tuple(row))
+
     with open(filename, mode, newline='', encoding='utf-8') as file:
         writer = csv.writer(file, quoting=csv.QUOTE_MINIMAL)
-        if file.tell() == 0:  # If file is empty, write header
-            writer.writerow(["Question", "Answer"])
-        for qa in questions_answers:
-            if ',' in qa:
-                question, answer = qa.split(',', 1)  # Split only on the first comma
-                writer.writerow([question, answer])
-
-def count_csv_entries(filename="output.csv"):
-    try:
-        with open(filename, 'r', newline='', encoding='utf-8') as file:
-            reader = csv.reader(file)
-            return sum(1 for row in reader) - 1  # Subtract one to exclude the header
-    except FileNotFoundError:
-        return 0  # If file not found, we have 0 entries
+        # Write the header if the file is empty
+        if os.stat(filename).st_size == 0:
+            writer.writerow(["Question", "Fine-tuned Answer"])
+            print("Header written to CSV file.")
+        
+        # Write each question-answer pair, avoiding duplicates
+        for item in questions_answers:
+            if len(item) == 2:
+                question, answer = item
+                if (question, answer) not in existing_pairs:
+                    print(f"Writing to CSV: {question} | {answer}")  # Debugging output
+                    writer.writerow([question, answer])
+                    existing_pairs.add((question, answer))
 
 def load_training_examples(filename='output.csv'):
     training_examples = []
@@ -95,8 +172,11 @@ def load_training_examples(filename='output.csv'):
             reader = csv.reader(file)
             next(reader)  # Skip the header row
             for row in reader:
-                # Append each row as a list within the larger list
-                training_examples.append([row[0], row[1]])  # Assuming row format is correct
+                # Check if the answer field is not empty
+                if len(row) >= 2 and row[1].strip():
+                    training_examples.append([row[0], row[1]])  # Assuming row format is correct
+                else:
+                    print(f"Skipped row with empty answer: {row}")
     except FileNotFoundError:
         print(f"The file {filename} was not found.")
     except Exception as e:
@@ -109,58 +189,55 @@ def format_qa_pairs(model_response):
     question = None
     for line in lines:
         if line.startswith("Q") and ":" in line:
-            question = line.split(":", 1)[1].strip()  # Split on the first colon and take the second part as the question
+            question = line.split(":", 1)[1].strip()  # Extract question
         elif line.startswith("A") and question:
-            answer = line.split(":", 1)[1].strip()  # Split on the first colon and take the second part as the answer
-            formatted_pairs.append(f"{question},{answer}")
+            answer = line.split(":", 1)[1].strip()  # Extract answer
+            formatted_pairs.append([question, answer])  # Append as list of [question, answer]
             question = None  # Reset question for the next pair
     return formatted_pairs
 
-# Example of using these functions in a workflow
-def generate_dataset():
-    print(run_pyats_job())
-    for _ in range(500):  # Loop up to 10 times
-        running_config = load_config()
-        if running_config == "Configuration file not found.":
-            print(running_config)
-            return
-        
-        model_response = send_request('llama3', running_config)
-        if not model_response:
-            print("No response or an error occurred while fetching the model response.")
-            continue  # Skip to the next iteration if no response
+def generate_dataset(num_iterations=5):
+    running_config_chunks = load_config()
+    if running_config_chunks == "Configuration file not found.":
+        print(running_config_chunks)
+        return
+    
+    models = ["llama3", "gemma2"]
+    for iteration in range(num_iterations):
+        for i, chunk in enumerate(running_config_chunks):
+            if chunk.strip():  # Skip empty chunks
+                for model in models:
+                    result = send_request(model, chunk)
+                    if not result:
+                        print(f"No response or an error occurred while fetching the model response for chunk {i+1} in iteration {iteration+1}.")
+                        continue  # Skip to the next iteration if no response
+                
+                    formatted_output = format_qa_pairs(result)
+                    if not formatted_output:
+                        print(f"No formatted output generated for chunk {i+1} in iteration {iteration+1}.")
+                        continue
+                
+                    save_to_csv(formatted_output)
+                    print(f"Batch of data appended to dataset for chunk {i+1} in iteration {iteration+1}.")
 
-        formatted_output = format_qa_pairs(model_response)
-        if not formatted_output:
-            print("No formatted output generated.")
-            continue
-        
-        save_to_csv(formatted_output)
-        print("Batch of data appended to dataset.")
-        
-        # Check the total number of entries
-        if count_csv_entries() >= 1000:
-            print("Reached 1000 questions and answers. Stopping the process.")
-            break
-
-# # Call the function to start the process
+# Call the function to start the process
 generate_dataset()
 
 # Load the training examples from the file
 training_examples = load_training_examples()
 
-#####Fine tune model
+##### Fine-tune the model
 output_csv_file = 'generated_answers.csv'
 
-# # Define the prompt template
+# Define the prompt template
 prompt_no_input_template = """<s>[INST] <<SYS>>
-You are an AI expert specialized in Cisco IOS XE running configurations. Your role is to provide accurate, clear, and concise explanations or solutions directly relevant to the configurations and queries presented. Ensure your responses reflect deep knowledge and practical applicability.
+You are a computer networking expert specialized in Cisco IOS XE running configurations.
 <</SYS>>
 
 %s [/INST]
 """
 
-# # Load the model
+# Load the model
 model_name_or_path = "meta-llama/Meta-Llama-3-8B"
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model = transformers.AutoModelForCausalLM.from_pretrained(
@@ -171,7 +248,7 @@ tokenizer = transformers.AutoTokenizer.from_pretrained(
     model_name_or_path, model_max_length=2048, 
     padding_side="right", use_fast=False)
 
-# # Set pad_token as eos_token
+# Set pad_token as eos_token
 tokenizer.pad_token = tokenizer.eos_token
 
 # Set up the ReFT config
@@ -184,17 +261,17 @@ reft_model = pyreft.get_reft_model(model, reft_config)
 reft_model.set_device(device)
 reft_model.print_trainable_parameters()
 
-# # Create data module
+# Create data module
 data_module = pyreft.make_last_position_supervised_data_module(
     tokenizer, model, [prompt_no_input_template % e[0] for e in training_examples], 
     [e[1] for e in training_examples])
 
-# # Define training arguments
+# Define training arguments
 training_args = transformers.TrainingArguments(
     num_train_epochs=100.0, output_dir="./tmp", per_device_train_batch_size=10, 
     learning_rate=4e-3, logging_steps=20)
 
-# # Train the model
+# Train the model
 trainer = pyreft.ReftTrainerForCausalLM(
     model=reft_model, tokenizer=tokenizer, args=training_args, **data_module)
 _ = trainer.train()
@@ -222,7 +299,7 @@ questions = load_questions_from_csv()
 # Open CSV file for writing the results
 with open(output_csv_file, mode='w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(['Question', 'Answer'])
+    writer.writerow(['Question', 'Fine-tuned Answer', 'Base Model Answer'])
 
     for question in questions:
         instruction = question
@@ -237,12 +314,44 @@ with open(output_csv_file, mode='w', newline='') as file:
             eos_token_id=tokenizer.eos_token_id, early_stopping=True
         )
         
-        answer = tokenizer.decode(reft_response[0], skip_special_tokens=True)
-        writer.writerow([question, answer])
+        fine_tuned_answer = tokenizer.decode(reft_response[0], skip_special_tokens=True)
+        
+        base_model_response = send_control_request(instruction)
+        
+        writer.writerow([question, fine_tuned_answer, base_model_response])
         print(f"Question: {question}")
-        print(f"Answer: {answer}\n")
+        print(f"Fine-tuned Answer: {fine_tuned_answer}")
+        print(f"Base Model Answer: {base_model_response}\n")
 
-# #Save and publish model
+print("Interactive mode. Type your questions or 'exit' to quit.")
+
+while True:
+    instruction = input("You: ")
+    
+    if instruction.lower() == "exit":
+        print("Goodbye!")
+        break
+
+    # Tokenize and prepare the input
+    prompt = prompt_no_input_template % instruction
+    prompt = tokenizer(prompt, return_tensors="pt").to(device)
+    
+    base_unit_location = prompt["input_ids"].shape[-1] - 1  # Last position
+    _, reft_response = reft_model.generate(
+        prompt, unit_locations={"sources->base": (None, [[[base_unit_location]]])},
+        intervene_on_prompt=True, max_new_tokens=512, do_sample=True, 
+        eos_token_id=tokenizer.eos_token_id, early_stopping=True
+    )
+    
+    fine_tuned_answer = tokenizer.decode(reft_response[0], skip_special_tokens=True)
+    
+    base_model_response = send_control_request(instruction)
+    
+    print(f"Question: {instruction}")
+    print(f"Fine-tuned Answer: {fine_tuned_answer}")
+    print(f"Base Model Answer: {base_model_response}\n")
+
+# Save and publish model
 reft_model.set_device("cpu")  # Send back to CPU before saving.
 reft_model.save(
     save_directory="./CiscoDevNetSandboxRunningConfig", 

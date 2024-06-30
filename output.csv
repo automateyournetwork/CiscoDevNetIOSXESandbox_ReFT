@@ -1,0 +1,742 @@
+Question,Fine-tuned Answer
+What is the size of the current configuration?,8151 bytes
+What is the timestamp of the last configuration change?,14:13:46 UTC Wed Jun 26 2024
+Who made the last configuration change?,admin
+What is the version of Cisco IOS XE?,17.12
+Is timestamping enabled for debug logs?,Yes
+What type of timestamp is used for debug logs in show-timezone format?,Datetime
+Is timestamping enabled for log files?,Yes
+What type of timestamp is used for log files in show-timezone format?,Datetime
+Is the Call-Home feature enabled on this device?,Yes
+What is the hostname of this Cisco device?,Cat8000V
+What is the boot system command configured to do?,bootflash:packages.conf
+What is the description of the VRF definition CHEMICAL?,CHEMICAL ENGINEERING FIRM
+What is the RD value for the VRF definition CHEMICAL?,65000:2
+What is the export route-target for the VRF definition CHEMICAL?,65000:2
+What is the import route-target for the VRF definition CHEMICAL?,65000:2
+What is the description of the VRF definition CHEM_MGMT?,CHEMICAL ENGINEERING MANAGER
+What is the RD value for the VRF definition CHEM_MGMT?,65000:3
+What is the export route-target for the VRF definition CHEM_MGMT?,65000:3
+What is the import route-target for the VRF definition CHEM_MGMT?,65000:4
+What is the description of the VRF definition POLICE?,POLICE DEPARTMENT
+What is the RD value for the VRF definition POLICE?,65000:1
+What is the export route-target for the VRF definition POLICE?,"65001:1, 65000:1"
+What is the import route-target for the VRF definition POLICE?,"65001:1, 65000:1"
+Is console logging enabled?,No
+What is the authentication model used in this configuration?,aaa new-model
+What is the authentication method used for login?,local
+Who or what is being authenticated for exec commands?,local
+Is AAA session-id common enabled?,Yes
+What is the name of the VRF defined in this configuration?,actor
+Is multicast-routing enabled for the VRF actor?,Yes
+What is the multicast-routing mode for the VRF actor?,Distributed
+Should IP domain lookup be performed?,No
+What is the domain name set for this device?,cisco.com
+What is the log action triggered when login is successful?,on-success log
+Is subscriber templating enabled?,Yes
+What is the version of VTP used in this configuration?,1
+Is multilink bundle-name authenticated?,Yes
+What is the name of the key chain?,CISCO_EIGRP
+What is the value of the key in the key chain?,2
+What is the key string for the key chain?,TEST125
+What is the name of the trustpoint?,TP-self-signed-3209586145
+What type of enrollment is used for the trustpoint?,Selfsigned
+What is the subject-name specified in the trustpoint configuration?,cn=IOS-Self-Signed-Certificate-3209586145
+Is revocation-check enabled or disabled for the trustpoint?,None (disabled)
+What is the name of the trustpoint in the crypto pki configuration?,SLA-TrustPoint
+What type of enrollment method is used by the crypto pki trustpoint SLA-TrustPoint?,pkcs12
+How does the crypto pki trustpoint SLA-TrustPoint perform revocation-checking?,crl
+What hash algorithm is used in the crypto pki trustpoint SLA-TrustPoint?,sha256
+What is the name of the certificate chain?,TP-self-signed-3209586145
+Is the certificate chain self-signed?,Yes
+What is the type of certificate in the SLA-TrustPoint chain?,CA
+What is the UDI PID of the license?,C8000V
+What is the serial number of the license?,9OBXJHNNU5V
+"How much processor memory is free, according to the low-watermark threshold?",63709
+What is the diagnostic bootup level set to?,Minimal
+What is the enable secret password?,9 $9$gpDORmivyfL/O.$spb5AgRyxos.uu9.8NFMNtaOD.lwU9miKThboj8ZW.I
+What is the privilege level of username admin?,15
+Is the password for username Gurjeet encrypted?,Yes
+Who has a secret password set for their account?,admin
+Is redundancy enabled?,"(No answer provided in the text, so no question is generated)"
+Is CDP enabled?,Yes
+What is the IP address of interface Loopback0?,10.0.0.1
+Does interface Loopback0 have an IP address configured?,Yes
+What is the subnet mask of interface Loopback0?,255.255.255.0
+What is the description of interface Loopback1?,Configured via RESTCONF
+Does interface Loopback1 have an IP address configured?,Yes
+What is the IP address of interface Loopback1?,1.1.1.1
+What is the subnet mask of interface Loopback1?,255.255.255.0
+Does interface Loopback10 have an IP address configured?,No
+What is the description of interface Loopback12?,test-loopback
+Does interface Loopback12 have an IP address configured?,Yes
+What is the IP address of interface Loopback12?,56.56.56.56
+What is the subnet mask of interface Loopback12?,255.255.255.255
+What is the description of interface Loopback40?,DevNet Expert
+Does interface Loopback40 have an IP address configured?,No
+Is interface Loopback40 shut down?,Yes
+What is the description of interface Loopback41?,DevNet Expert
+Does interface Loopback41 have an IP address configured?,No
+What is the description of interface Loopback42?,DevNet Expert
+Does interface Loopback42 have an IP address configured?,No
+Is interface Loopback42 shut down?,Yes
+What is the description of interface Loopback43?,DevNet Expert
+Does interface Loopback43 have an IP address configured?,No
+What is the description of interface Loopback44?,DevNet Expert
+Is interface Loopback44 shut down?,Yes
+Does interface Loopback44 have an IP address configured?,No
+What is the description of interface Loopback45?,DevNet Expert
+Does interface Loopback45 have an IP address configured?,No
+What is the IP address of interface Loopback66?,7.10.7.10
+What is the subnet mask of interface Loopback66?,255.255.255.0
+What is the interface being configured?,Loopback99
+Is IP VRF forwarding enabled on Loopback99?,Yes
+Which VRF is being forwarded to on Loopback99?,actor
+Does Loopback99 have an IP address configured?,Yes
+What is the IP address of Loopback99?,12.1.1.2
+What is the subnet mask of Loopback99?,255.255.255.252
+Is PIM sparse-mode enabled on Loopback99?,Yes
+Does Loopback99 support OSPF network point-to-point?,Yes
+What is the description of interface Loopback123?,configured by JM
+Does interface Loopback123 have an IP address configured?,Yes
+What is the IP address of interface Loopback123?,192.168.100.100
+What is the subnet mask of interface Loopback123?,255.255.255.0
+What is the description of interface Loopback150?,[Link3 loopback interface
+Does interface Loopback150 have an IP address configured?,Yes
+What is the IP address of interface Loopback150?,10.1.1.1
+What is the subnet mask of interface Loopback150?,255.255.255.0
+What is the IP address of interface Loopback219?,192.168.10.1
+Does interface Loopback219 have a subnet mask configured?,Yes
+What is the subnet mask of interface Loopback219?,255.255.255.0
+What is the description of interface Loopback222?,Tezak 7amra
+Does interface Loopback222 have an IP address configured?,Yes
+What is the IP address of interface Loopback222?,69.69.69.69
+What is the subnet mask of interface Loopback222?,255.255.255.0
+What is the IP address of interface Loopback238?,192.168.50.1
+What is the subnet mask of interface Loopback238?,255.255.255.0
+What is the IP address of interface Loopback251?,192.168.60.1
+What is the subnet mask of interface Loopback251?,255.255.255.0
+What is the IP address of interface Loopback666?,100.64.66.6
+What is the subnet mask of interface Loopback666?,255.255.255.255
+What is the IP address of interface Loopback1001?,10.10.10.10
+What is the subnet mask of interface Loopback1001?,255.255.255.0
+What is the description of interface Loopback2662?,Added by DaddyZ
+Does interface Loopback2662 have an IP address configured?,Yes
+What is the IP address of interface Loopback2662?,10.2.3.26
+What is the subnet mask of interface Loopback2662?,255.255.255.0
+What is the IP address of interface VirtualPortGroup0?,192.168.1.1
+What is the subnet mask of interface VirtualPortGroup0?,255.255.255.0
+Is interface VirtualPortGroup0 configured with NAT inside?,Yes
+What is the description of interface GigabitEthernet1?,Configured by Ansible
+Does interface GigabitEthernet1 have an IP address configured?,Yes
+What is the IP address of interface GigabitEthernet1?,10.10.20.48
+What is the subnet mask of interface GigabitEthernet1?,255.255.255.0
+Is negotiation enabled on interface GigabitEthernet1?,Yes
+What is the description of interface GigabitEthernet1.500?,Cust 1 data
+What is the encapsulation type used on interface GigabitEthernet1.500?,dot1Q 500
+What is the IP address configured on interface GigabitEthernet1.500?,10.255.100.1
+What is the subnet mask of the IP address configured on interface GigabitEthernet1.500?,255.255.255.0
+Is unicast source verification enabled on interface GigabitEthernet1.500?,Yes
+What is the description of interface GigabitEthernet1.501?,Cust 2 data
+What is the encapsulation mode for interface GigabitEthernet1.501?,dot1Q 501
+What is the IP address of interface GigabitEthernet1.501?,10.255.101.1
+What is the subnet mask of interface GigabitEthernet1.501?,255.255.255.0
+Is IP verification enabled for unicast source reachable via receive for interface GigabitEthernet1.501?,Yes
+What is the description of interface GigabitEthernet1.502?,Cust 3 data
+Which encapsulation type is used for interface GigabitEthernet1.502?,dot1Q 502
+What is the IP address of interface GigabitEthernet1.502?,10.255.102.1
+What is the subnet mask of interface GigabitEthernet1.502?,255.255.255.0
+Is unicast source verification enabled for interface GigabitEthernet1.502?,Yes
+What is the description of interface GigabitEthernet1.2000?,Cust 4 mgmt
+What is the encapsulation type for interface GigabitEthernet1.2000?,dot1Q 510 second-dot1q 2000
+Does interface GigabitEthernet1.2000 have an IP address configured?,Yes
+What is the IP address of interface GigabitEthernet1.2000?,10.255.200.1
+What is the subnet mask of interface GigabitEthernet1.2000?,255.255.255.0
+Is IP verification enabled for unicast source reachable-via rx on interface GigabitEthernet1.2000?,Yes
+What is the description of interface GigabitEthernet1.2001?,Cust 4 data
+What is the encapsulation type for interface GigabitEthernet1.2001?,dot1Q 510 second-dot1q 2001
+Does interface GigabitEthernet1.2001 have an IP address configured?,Yes
+What is the IP address of interface GigabitEthernet1.2001?,10.255.201.1
+What is the subnet mask of interface GigabitEthernet1.2001?,255.255.255.0
+Does interface GigabitEthernet1.2001 have unicast source verification enabled?,Yes
+What is the description of interface GigabitEthernet1.2002?,Cust 5 mgmt
+What is the encapsulation type used for interface GigabitEthernet1.2002?,dot1Q second-dot1q
+What is the VLAN ID used for interface GigabitEthernet1.2002?,511 2002
+What is the IP address of interface GigabitEthernet1.2002?,10.255.202.1
+What is the subnet mask of interface GigabitEthernet1.2002?,255.255.255.0
+Is unicast source verification enabled for interface GigabitEthernet1.2002?,Yes
+What is the description of interface GigabitEthernet1.2003?,Cust 5 data
+What is the encapsulation mode for interface GigabitEthernet1.2003?,dot1Q second-dot1q
+What is the VLAN ID used in the encapsulation for interface GigabitEthernet1.2003?,511
+What is the inner VLAN ID used in the encapsulation for interface GigabitEthernet1.2003?,2003
+Does interface GigabitEthernet1.2003 have an IP address configured?,Yes
+What is the IP address of interface GigabitEthernet1.2003?,10.255.203.1
+What is the subnet mask of interface GigabitEthernet1.2003?,255.255.255.0
+Is unicast source verification enabled on interface GigabitEthernet1.2003?,Yes
+What is the description of interface GigabitEthernet1.2004?,Cust 6 mgmt
+What is the encapsulation mode used by interface GigabitEthernet1.2004?,dot1Q 512 second-dot1q 2004
+Does interface GigabitEthernet1.2004 have an IP address configured?,Yes
+What is the IP address of interface GigabitEthernet1.2004?,10.255.204.1
+What is the subnet mask of interface GigabitEthernet1.2004?,255.255.255.0
+Is IP verification enabled on interface GigabitEthernet1.2004?,Yes
+How is the IP source verified on interface GigabitEthernet1.2004?,reachable-via rx
+What is the description of interface GigabitEthernet1.2005?,Cust 6 data
+Is interface GigabitEthernet1.2005 using encapsulation dot1Q with a VLAN ID of 512?,Yes
+Is there a second-dot1q subinterface on GigabitEthernet1.2005?,Yes
+What is the IP address of interface GigabitEthernet1.2005?,10.255.205.1
+What is the subnet mask of interface GigabitEthernet1.2005?,255.255.255.0
+Is IP verification enabled on unicast sources for GigabitEthernet1.2005?,Yes
+How does GigabitEthernet1.2005 verify reachable unicast sources?,Via receive (rx)
+What is the description of interface GigabitEthernet1.2100?,Cust 10 data ceased
+What is the description of interface GigabitEthernet2?,Configured by RESTCONF
+Does interface GigabitEthernet2 have an IP address configured?,Yes
+What is the IP address of interface GigabitEthernet2?,192.168.2.1
+What is the subnet mask of interface GigabitEthernet2?,255.255.255.0
+Is the negotiation auto-enabled on interface GigabitEthernet2?,Yes
+What is the description of interface GigabitEthernet3?,Networking workflow demo
+Does interface GigabitEthernet3 have an IP address configured?,Yes
+What is the IP address of interface GigabitEthernet3?,13.13.13.13
+What is the subnet mask of interface GigabitEthernet3?,255.255.255.0
+Is negotiation enabled on interface GigabitEthernet3?,Yes
+Does interface Vlan100 have an IP address configured?,Yes
+What is the IP address of interface Vlan100?,100.1.1.1
+What is the subnet mask of interface Vlan100?,255.255.255.0
+What is the EIGRP autonomous system number?,10
+What is the EIGRP AS number?,20
+What is the name of the EIGRP router?,TESTE
+What is the address family configured in this running configuration?,ipv4 unicast
+What is the autonomous system number for the IPv4 unicast address family?,45000
+What is the authentication mode for af-interface GigabitEthernet1?,hmac-sha-256 Tes
+What is the first command in the running configuration?,topology
+Is exit-af-topology a command to exit an address family or a topology?,Topology
+What is the OSPF router ID?,1
+Are there any networks configured for area 0?,Yes
+What is the network address of one of the networks configured for area 0?,1.1.1.0
+Is this network a subnet of 1.1.1.0?,No (since 0.0.0.255 is used as the mask)
+What is the range of IP addresses covered by one of the networks configured for area 0?,1.1.1.0 - 1.1.1.254
+Are there any other networks configured for area 0 besides 1.1.1.0/24?,Yes (192.168.0.0/16)
+What is the OSPF router ID?,41
+Is area 41 configured for the OSPF network?,Yes
+What is the IP address range of the OSPF network in area 41?,41.41.41.41 0.0.0.0
+What is the first command in the running configuration?,iox
+Does this configuration enable IP forwarding for a specific protocol?,Yes
+Which protocol does the configuration forward?,nd
+Is PIM bidirectional enabled?,Yes
+What is the RP address for PIM?,12.1.1.1
+Are there multiple RP addresses configured for VRF actor?,Yes
+What are the RP addresses for VRF actor?,1.1.1.1 and 12.1.1.1
+Is PIM SSM default enabled on VRF actor?,Yes
+Are HTTP services disabled on the device?,"Yes (HTTP server is disabled, but secure HTTP server is enabled)"
+What is the authentication method for HTTP services?,local
+Can SSH bulk transfers be performed up to a maximum of 131072 bytes?,Yes
+Is SSH RSA keypair-name ssh-key used on the device?,Yes
+Is SCP server enable enabled on the device?,Yes
+"What is the purpose of the first IP access list, MANAGEMENT?",standard
+Which subnet is permitted in the MANAGEMENT access list at line 10?,10.4.95.0 0.0.0.127
+Is 100.0.0.0 a permitted subnet in the MANAGEMENT access list?,Yes (permitted by line 20)
+Which network is allowed through the MANAGEMENT access list at line 30?,172.26.0.0 0.0.255.255
+What type of IP access list is pim-group?,standard
+Is 225.0.0.0 a permitted multicast group in the pim-group access list?,Yes (permitted by line 10)
+Which subnet is allowed through the pim-group access list at line 20?,239.255.255.240 0.0.0.15
+What is the name of the first access list in this configuration?,NAT-ACL
+Does the first access list permit traffic from 192.168.1.0 to any destination IP?,Yes
+How many rules does the TEST access list have?,1
+Does the TEST2 access list permit traffic from 1.1.1.0 to any destination IP?,Yes
+What is the source and destination IP for the rule in the Test access list?,Any and host 1.1.1.1
+What is the SNMP community set for?,devnet
+What is the access level of the SNMP community set?,RO
+What is the configuration mode for this section of the running configuration?,control-plane
+What is the banner message for MOTD?,This is my banneer for all of my device
+What is the stopbit value for console lines?,1
+Is there an exec-timeout configured for console lines?,Yes
+What is the length of VTY lines (0-4)?,0
+Which transport input protocol is supported on VTY lines (0-4)?,all
+Is there an exec-timeout configured for VTY lines (5-16)?,Yes
+What is the length of VTY lines (5-16)?,0
+Which transport input protocol is supported on VTY lines (5-16)?,ssh
+Is call-home enabled?,(No answer present in the provided configuration)
+What is the contact email address configured for call-home?,sch-smart-licensing@cisco.com
+What is the contact email address for SCH notifications?,sch-smart-licensing@cisco.com
+"Is the profile ""CiscoTAC-1"" active?",Yes
+"What is the destination transport method used in profile ""CiscoTAC-1""?",http
+What is the command used to end the configuration session?,end
+What is the timestamp of the last configuration change?,14:13:46 UTC Wed Jun 26 2024 by admin
+Is debug timestamping enabled with a timezone display?,Yes
+Are log timestamps enabled with a timezone display?,Yes
+Is call-home service enabled?,Yes
+What is the utilization monitor load for the qfp platform set to?,80
+Is punt-keepalive disabled for the kernel core?,Yes
+Is SSLVPN using PD enabled?,Yes
+Is console virtualization enabled?,Yes
+What is the hostname of this Cisco IOS XE device?,Cat8000V
+What is the boot system command?,bootflash:packages.conf
+What is the export route-target for the VRF definition POLICE?,65001:1
+What is the import route-target for the VRF definition POLICE?,65001:1
+Is logging to the console enabled?,No
+What is the AAA model used in this configuration?,New-model
+Is AAA authentication enabled for login?,Yes
+What is the default authentication method used for login with AAA?,local
+Is AAA authorization enabled for exec commands?,Yes
+What is the default authorization method used for exec commands with AAA?,local
+Is IP vrf actor defined?,Yes
+Is IP multicast routing enabled?,Yes
+What is the VRF value for the IP multicast routing configuration?,actor
+Is the IP multicast routing distributed?,Yes
+What is the domain name configured?,cisco.com
+What is the login behavior when a user successfully logs in?,log
+What is the VTP version?,1
+What is the value of the key in the key chain CISCO_EIGRP?,2
+What is the string associated with the key in the key chain CISCO_EIGRP?,TEST125
+What type of enrollment is used for trustpoint TP-self-signed-3209586145?,Selfsigned
+What is the subject name of the self-signed certificate?,cn=IOS-Self-Signed-Certificate-3209586145
+Is revocation checking enabled for this trustpoint?,No
+What is the hash algorithm used for the RSA key pair?,SHA256
+What is the name of the trustpoint?,SLA-TrustPoint
+What type of enrollment is used for the trustpoint SLA-TrustPoint?,pkcs12
+How does the trustpoint SLA-TrustPoint perform revocation-check?,crl
+What hash algorithm is used by the trustpoint SLA-TrustPoint?,sha256
+What is the name of the certificate chain in the configuration?,TP-self-signed-3209586145
+Is the certificate chain TP-self-signed-3209586145 a self-signed certificate?,Yes
+"What type of certificate is ""01"" under the TP-self-signed-3209586145 certificate chain?",Self-signed certificate
+Is there another certificate chain in the configuration?,Yes
+What is the name of the other certificate chain in the configuration?,SLA-TrustPoint
+What is the product ID (pid) of the license?,C8000V
+What is the serial number (sn) of the license?,9OBXJHNNU5V
+Is the processor memory free at a low watermark level?,Yes
+At what level is the diagnostic bootup set?,Minimal
+Is password encryption used for username Gurjeet?,"No (since it's marked as ""password"" instead of ""secret"")"
+Is redundancy enabled in the running configuration?,"(No answer, since redundancy is not explicitly mentioned or configured)"
+Is CDP running?,Yes
+Is Loopback99 participating in VRF forwarding?,"Yes, the VRF is actor."
+Is PIM sparse-mode enabled on Loopback99?,"Yes, ip pim sparse-mode is configured."
+Is OSPF network type point-to-point for Loopback99?,"Yes, ip ospf network point-to-point is configured."
+Does interface Loopback238 have an IP address configured?,Yes
+Is NAT enabled on interface VirtualPortGroup0?,Yes
+Is negotiation auto-enabled on interface GigabitEthernet1?,Yes
+What is the encapsulation mode for interface GigabitEthernet1.500?,dot1Q 500
+Does interface GigabitEthernet1.500 have an IP address configured?,Yes
+What is the IP address of interface GigabitEthernet1.500?,10.255.100.1
+What is the subnet mask of interface GigabitEthernet1.500?,255.255.255.0
+Is IP verification enabled for unicast source reachable-via rx on interface GigabitEthernet1.501?,Yes
+What is the encapsulation method used by interface GigabitEthernet1.502?,dot1Q 502
+What is the IP address configured on interface GigabitEthernet1.502?,10.255.102.1
+Is IP verification enabled for unicast source reachable-via rx on interface GigabitEthernet1.502?,Yes
+What is the encapsulation mode for interface GigabitEthernet1.2000?,dot1Q 510 second-dot1q 2000
+Is unicast source verification enabled on interface GigabitEthernet1.2000?,Yes
+What is the encapsulation method used by interface GigabitEthernet1.2001?,dot1Q 510 second-dot1q 2001
+What is the encapsulation mode for interface GigabitEthernet1.2002?,dot1Q 511 second-dot1q 2002
+Does the IP verification for unicast source checking on interface GigabitEthernet1.2002 check if the packet is reachable via receive (rx) direction?,Yes
+What is the encapsulation mode used on interface GigabitEthernet1.2003?,dot1Q
+What is the second-dot1q value used on interface GigabitEthernet1.2003?,2003
+Is IP verification enabled for unicast source reachable-via rx on interface GigabitEthernet1.2003?,Yes
+What is the encapsulation type for interface GigabitEthernet1.2004?,dot1Q 512 second-dot1q 2004
+Is unicast source verification enabled for interface GigabitEthernet1.2004?,Yes
+Does interface GigabitEthernet1.2005 have an IP address configured?,Yes
+Is there any additional encapsulation configuration on interface GigabitEthernet1.2005?,Yes
+What is the encapsulation type used on interface GigabitEthernet1.2005?,dot1Q
+What is the second-dot1q value used on interface GigabitEthernet1.2005?,2005
+Is interface GigabitEthernet2 set to negotiate automatically?,Yes
+Is IP negotiation enabled on interface GigabitEthernet3?,Yes
+What is the number of EIGRP router?,10
+Is the EIGRP router defined in this configuration?,Yes
+What is the command used to start defining the topology in this running configuration?,topology
+Is the exit-af-topology command present in this running configuration?,Yes
+Does the exit-address-family command appear in this running configuration?,Yes
+What is the OSPF process ID?,1
+Does the network 1.1.1.0/32 belong to area 0 in OSPF?,Yes
+Is the network 192.168.0.0/24 also part of area 0 in OSPF?,Yes
+What is the OSPF router number?,41
+Is the network 41.41.41.41 included in OSPF area 41?,Yes
+What is the IxO configuration mode?,iox
+Is IP forwarding protocol enabled for NDS (Next Domain Sequence)?,Yes
+"Are there multiple RP addresses configured for VRF ""actor""?",Yes
+"What are the two RP addresses configured for VRF ""actor""?",1.1.1.1 and 12.1.1.1
+"Is SSM (Source Specific Multicast) enabled by default in VRF ""actor""?",Yes
+Are HTTP services disabled on this router?,Yes
+What is the authentication method for HTTP services on this router?,Local
+Are HTTP services secured with SSL/TLS on this router?,Yes
+Is NAT enabled on GigabitEthernet1 interface with overload mode?,Yes
+What is the SSH bulk mode size configured on this router?,131072
+"Is RSA key pair named ""ssh-key"" used for SSH connections on this router?",Yes
+Is SCP server enabled on this router?,Yes
+What is the name of the first IP access list?,MANAGEMENT
+Which subnet is permitted in the MANAGEMENT IP access list at line 10?,10.4.95.0 0.0.0.127
+Which range of IP addresses is permitted in the MANAGEMENT IP access list at line 20?,100.0.0.0 0.255.255.255
+Which subnet is permitted in the MANAGEMENT IP access list at line 30?,172.26.0.0 0.0.255.255
+What is the name of the second IP access list?,pim-group
+Which range of multicast addresses is permitted in the pim-group IP access list at line 10?,225.0.0.0 0.1.255.255
+Which range of multicast addresses is permitted in the pim-group IP access list at line 20?,239.255.255.240 0.0.0.15
+What is the name of the first extended IP access list?,NAT-ACL
+Does the 10th entry in the NAT-ACL permit traffic from any host to 192.168.1.0/24?,Yes
+What is the destination address specified in the 10th entry of the TEST access list?,any
+"Is there another access list with a name similar to ""TEST"" but spelled with uppercase letters (""Test"")?",Yes
+Does the 10th entry in the Test access list permit traffic from any host to a specific destination address (1.1.1.1)?,Yes
+What is the SNMP community set for the RO role?,devnet
+What is the control-plane configuration?,
+Is there any additional information about the control-plane configuration?,No
+What is the message displayed by the banner motd?,This is my banneer for all of my device
+What is the value of stopbits for the console line?,1
+Is there an execution timeout set for the console line?,Yes
+How many seconds does the execution timeout last for the console line?,0
+Are there any limitations on the length of input data for the VTY lines?,No
+What is the transport input method allowed for the VTY lines?,all
+Is there a length limitation set for the VTY lines (5-16)?,No
+Is call-home configured?,Yes
+What is the email address configured for call-home in this Cisco device?,sch-smart-licensing@cisco.com
+What is the contact email address used to send SCH notifications?,sch-smart-licensing@cisco.com
+Is the CiscoTAC-1 profile active?,Yes
+What is the transport method for the destination in the CiscoTAC-1 profile?,http
+Are there any NTP servers configured?,Yes
+What are the IP addresses of the NTP servers configured?,12.12.12.12 and 13.13.13.13
+Is this an empty running configuration?,Yes
+When was the last configuration change made?,Wed Jun 26 2024 at 14:13:46 UTC
+What is the version of the Cisco IOS XE?,17.12
+Is timestamps enabled for debug messages?,Yes
+Is timestamps enabled for log messages?,Yes
+Does the device have call-home service enabled?,Yes
+What is the utilization threshold for QFP platform monitoring?,80
+Are punt-keepalive kernel cores disabled on the platform?,Yes
+Is SSL VPN using a PD (Packet Description) on the platform?,Yes
+Is console virtual on the platform?,Yes
+What is the boot system command used in this configuration?,bootflash:packages.conf
+Is there an export route-target configured for the VRF definition CHEMICAL?,Yes
+What is the export route-target value for the VRF definition CHEMICAL?,65000:2
+Is there an import route-target configured for the VRF definition CHEMICAL?,Yes
+What is the import route-target value for the VRF definition CHEMICAL?,65000:2
+Are console logs enabled?,No
+What is the AAA new-model command used for?,"(Answer cannot be directly found in the text, skipping this question)"
+What is the default authentication method for login?,local
+What is the default authorization method for exec?,local
+What is the VRF associated with IP multicast routing?,actor
+Is IP multicast routing distributed?,Yes
+Does IP domain lookup need to be performed?,No
+What is the VTP version configured?,1
+How many keys does the key chain CISCO_EIGRP contain?,1 (key 2)
+What is the value of the second key in the key chain CISCO_EIGRP?,TEST125
+What type of enrollment method is used for the trustpoint?,Selfsigned
+Is revocation checking enabled for the trustpoint?,No
+What algorithm is used to generate the RSA key pair?,None (implied by absence of any other algorithm specification)
+What hashing algorithm is used for the self-signed certificate?,SHA256
+How does the revocation-check work for the trustpoint SLA-TrustPoint?,crl
+What is the name of the certificate chain in the running configuration?,TP-self-signed-3209586145
+Is there a self-signed certificate in the certificate chain TP-self-signed-3209586145?,Yes
+How many certificates are included in the certificate chain SLA-TrustPoint?,1 (CA certificate)
+What is the UDI of the Cisco device?,C8000V
+What is the serial number (SN) of the Cisco device?,9OBXJHNNU5V
+What is the low-watermark processor memory free value set to?,63709
+What diagnostic bootup level is configured for this Cisco device?,minimal
+What is the value of the enable secret?,9 $9$gpDORmivyfL/O.$spb5AgRyxos.uu9.8NFMNtaOD.lwU9miKThboj8ZW.I
+"What is the privilege level of the username ""admin""?",15
+"Is the password for the username ""Gurjeet"" encrypted?",Yes
+"What is the secret password for the username ""test123""?",Not specified
+Is redundancy configured?,Yes
+Does interface Loopback99 have IP forwarding enabled?,Yes
+What is the VRF being forwarded to for interface Loopback99?,actor
+Is an IP address configured on interface Loopback99?,Yes
+What is the IP address of interface Loopback99?,12.1.1.2
+What is the subnet mask of interface Loopback99?,255.255.255.252
+Is PIM sparse-mode enabled on interface Loopback99?,Yes
+Is OSPF network mode set to point-to-point for interface Loopback99?,Yes
+What is the description of interface Loopback150?,Link3 loopback interface
+Does interface Loopback219 have an IP address configured?,Yes
+Does interface Loopback666 have a subnet mask configured?,Yes
+Is NAT enabled for interface VirtualPortGroup0?,Yes
+What is the encapsulation mode used by interface GigabitEthernet1.500?,dot1Q 500
+Is IP verification enabled on unicast sources for interface GigabitEthernet1.500?,Yes
+Is interface GigabitEthernet1.501 using dot1Q encapsulation?,Yes
+What is the VLAN ID for the dot1Q encapsulation on interface GigabitEthernet1.501?,501
+Does interface GigabitEthernet1.501 have an IP address configured?,Yes
+"Is IP unicast source verification enabled on interface GigabitEthernet1.501, and if so, how?","Yes, reachable-via rx"
+What is the encapsulation mode for interface GigabitEthernet1.502?,dot1Q 502
+Does interface GigabitEthernet1.502 enable unicast source verification via receive path?,Yes
+What encapsulation method is used by interface GigabitEthernet1.2000?,dot1Q 510 second-dot1q 2000
+What is the IP address configured on interface GigabitEthernet1.2000?,10.255.200.1
+Is unicast source verification enabled on interface GigabitEthernet1.2001?,Yes
+What is the encapsulation type for interface GigabitEthernet1.2002?,dot1Q 511 second-dot1q 2002
+Is IP address verification enabled on interface GigabitEthernet1.2002?,Yes
+What is the encapsulation type for interface GigabitEthernet1.2003?,dot1Q 511 second-dot1q 2003
+Is IP address verification enabled on interface GigabitEthernet1.2003?,Yes
+What is the encapsulation mode for interface GigabitEthernet1.2004?,dot1Q 512 second-dot1q 2004
+Is IP verification enabled for unicast source reachable-via rx on interface GigabitEthernet1.2004?,Yes
+What is the encapsulation mode for interface GigabitEthernet1.2005?,dot1Q 512 second-dot1q 2005
+Is IP verification enabled on interface GigabitEthernet1.2005?,Yes
+Is negotiation enabled for interface GigabitEthernet2?,Yes
+Is negotiation enabled for interface GigabitEthernet3?,Yes
+What is the number of the EIGRP router?,10
+What is the AS number of the EIGRP router?,20
+What is the autonomous system number for IPv4 unicast?,45000
+What is the authentication mode used for GigabitEthernet1?,hmac-sha-256 Tes
+What is the topology configuration set in this running configuration?,base
+Are there any networks configured in area 0?,Yes
+What is the first network configured in area 0?,1.1.1.0/31
+Is the second network also configured in area 0?,Yes
+What is the OSPF process ID?,41
+Is there a network statement configured in the OSPF routing process?,Yes
+What is the IP address of the network advertised in OSPF area 41?,41.41.41.41
+Is the network advertised in OSPF area 41 with a default mask?,Yes (0.0.0.0)
+Is IP forwarding protocol enabled?,Yes
+What is the RP address for the actor VRF in PIM?,1.1.1.1
+Does the actor VRF in PIM have a PIM group?,Yes
+Is SSM (Source Specific Multicast) enabled by default for the actor VRF in PIM?,Yes
+Is HTTP server disabled on this device?,Yes
+What is the authentication method for HTTP access?,local
+Is HTTP secure-server enabled?,Yes
+Does the router have a route to 0.0.0.0/0 via GigabitEthernet1 with a next-hop IP address of 10.10.20.254?,Yes
+Does the router have a route to 172.16.22.22/32 via 192.168.0.1?,Yes
+Does the router have a route to 172.16.22.23/32 via 192.168.0.1?,Yes
+Is NAT (Network Address Translation) enabled on this device?,Yes
+What is the bulk mode for SSH connections?,131072
+Who does the 10th permit entry in the MANAGEMENT IP access list allow to pass through?,10.4.95.0 with a mask of 0.0.0.127
+Does the MANAGEMENT IP access list have an entry that permits traffic from 100.0.0.0 to 0.255.255.255?,Yes
+Who does the 30th permit entry in the MANAGEMENT IP access list allow to pass through?,172.26.0.0 with a mask of 0.0.255.255
+Who does the 10th permit entry in the pim-group IP access list allow to pass through?,225.0.0.0 with a mask of 0.1.255.255
+Who does the 20th permit entry in the pim-group IP access list allow to pass through?,239.255.255.240 with a mask of 0.0.0.15
+What is the name of the first IP access list?,NAT-ACL
+Does the NAT-ACL allow traffic from 192.168.1.0 to any destination IP?,Yes
+How many permit statements are there in the TEST2 IP access list?,1
+Which IP address is permitted by the Test IP access list?,1.1.1.1
+What is the community string set for SNMP?,devnet
+"What is the access level set for the SNMP community ""devnet""?",RO
+What is the control plane mode?,(No answer found in the text)
+What is the banner motd message?,This is my banneer for all of my device
+What is the console serial line timeout?,0 0
+How many stop bits are configured for the console serial line?,1
+Are there any exec-timeout settings configured for the auxiliary (aux) serial line?,Yes
+Are there any exec-timeout settings configured for the virtual terminal lines (VTYs)?,Yes
+What is the length of data packets transported on VTY lines 0-4?,0
+Which transport input protocols are allowed for VTY lines 0-4?,all
+What is the length of data packets transported on VTY lines 5-16?,0
+Which transport input protocol is allowed for VTY lines 5-16?,ssh
+Is call-home enabled?,"(Note: Since there's no explicit yes/no statement, I couldn't generate a question for this)"
+What is the configured contact email address for call-home?,sch-smart-licensing@cisco.com
+"Is the profile ""CiscoTAC-1"" currently active?",Yes
+"What is the destination transport method used by the profile ""CiscoTAC-1""?",http
+Is the end command present in this configuration?,Yes
+What is the current size of the running configuration?,8151 bytes
+When was the last configuration change made?,14:13:46 UTC Wed Jun 26 2024
+What is the Cisco IOS XE version?,17.12
+Is timestamping enabled for debug messages?,Yes
+What is the show timezone option set to for timestamps in log and debug messages?,show-timezone
+What is the load threshold percentage for platform QFP utilization monitoring?,80
+Are punt-keepalive kernel cores disabled?,Yes
+Is SSL VPN using a provider daemon (PD)?,Yes
+What is the boot system command pointing to?,bootflash:packages.conf
+"Has the AAA (Authentication, Authorization, and Accounting) new-model been configured?",Yes
+What is the authentication method for login?,local
+Who or what is used for exec authorization?,local
+What is the VRF definition in this configuration?,actor
+Is multicast-routing enabled?,Yes
+What is the VRF name for multicast-routing?,actor
+Is multicast-routing distributed?,Yes
+Should IP domain lookup be performed by default?,No
+What is the domain name set to in this configuration?,cisco.com
+What is the login behavior after a successful login attempt?,log
+What is the value of the key for this key chain?,2
+What is the string used in this key chain?,TEST125
+What is the trustpoint name?,TP-self-signed-3209586145
+How is enrollment configured for the trustpoint?,Selfsigned
+What is the subject-name for the certificate?,cn=IOS-Self-Signed-Certificate-3209586145
+Is revocation-check enabled?,"No (based on ""revocation-check none"")"
+What hashing algorithm is used for the RSA key pair?,SHA256
+What is the trustpoint name?,SLA-TrustPoint
+What type of enrollment is used for the crypto pki trustpoint?,pkcs12
+What is the revocation-check method for the crypto pki trustpoint?,crl
+What hash algorithm is used by the crypto pki trustpoint?,sha256
+Is this a self-signed certificate chain?,Yes
+What is the type of certificate 01 in the TP-self-signed-3209586145 chain?,Self-signed
+"Is there another certificate chain, SLA-TrustPoint, present in the running configuration?",Yes
+What is the type of the CA (Certificate Authority) certificate 01 in the SLA-TrustPoint chain?,Certificate Authority
+What is the UDI for the license configuration?,C8000V
+What is the serial number (SN) for the license configuration?,9OBXJHNNU5V
+What is the current processor memory free low-watermark value?,63709
+What diagnostic bootup level has been configured?,minimal
+What is the secret password hash for username admin?,$9$lgJxy7Ga.Th5FU$gocFhcHC/8pvixGr.s2wB7X59FiGVvwYawfCPrmaJuY
+What is the privilege level of username Gurjeet?,15
+Is redundancy enabled?,"(Note: The answer is implicit, but since there's no explicit statement about disabling or enabling redundancy, we'll assume it's enabled.)"
+Is interface Loopback99 using VRF forwarding?,Yes
+What is the VRF being forwarded by interface Loopback99?,actor
+Does interface Loopback99 have an IP address configured?,Yes
+Is OSPF network mode set to point-to-point on interface Loopback99?,Yes
+Does interface Loopback251 have an IP address configured?,Yes
+Is NAT enabled for inside traffic on interface VirtualPortGroup0?,Yes
+Is negotiation enabled for interface GigabitEthernet1?,Yes
+What is the encapsulation type for interface GigabitEthernet1.500?,dot1Q 500
+Is IP verification enabled for unicast sources on interface GigabitEthernet1.500?,Yes
+Is encapsulation dot1Q 501 enabled on interface GigabitEthernet1.501?,Yes
+Is ip verify unicast source reachable-via rx enabled on interface GigabitEthernet1.501?,Yes
+Is the encapsulation type for interface GigabitEthernet1.502 dot1Q 502?,Yes
+What is the encapsulation mode used by interface GigabitEthernet1.2000?,dot1Q 510 second-dot1q 2000
+Is unicast source verification enabled on interface GigabitEthernet1.2000?,"Yes (indicated by ""ip verify unicast source reachable-via rx"")"
+Is interface GigabitEthernet1.2001 using dot1Q encapsulation?,Yes
+What is the second-dot1q value for interface GigabitEthernet1.2001?,2001
+What encapsulation type is used for interface GigabitEthernet1.2002?,dot1Q 511 second-dot1q 2002
+Does interface GigabitEthernet1.2002 perform IP verification for unicast source reachable via RX?,Yes
+What is the encapsulation mode used on interface GigabitEthernet1.2003?,dot1Q 511 second-dot1q 2003
+Is IP verification enabled on interface GigabitEthernet1.2003?,Yes
+What is the source verification mode used on interface GigabitEthernet1.2003?,reachable-via rx
+Is there an encapsulation method configured for interface GigabitEthernet1.2004?,Yes
+What is the second-dot1q value for interface GigabitEthernet1.2004?,2004
+Is there an IP verification configuration for unicast sources on interface GigabitEthernet1.2004?,Yes
+"Is unicast source verification enabled on interface GigabitEthernet1.2005, and if so, what mode is it in?","Yes, reachable-via rx"
+Is negotiation enabled on interface GigabitEthernet2?,Yes
+Is negotiation auto-enabled on interface GigabitEthernet3?,Yes
+What is the AS number of the EIGRP router?,10
+What is the autonomous system number for IPv4 unicast address-family?,45000
+What is the first command in this running configuration?,topology
+Is there any exit-af-topology command in this configuration?,Yes
+Does the configuration contain an exit-address-family command?,Yes
+What is the OSPF router ID number?,1
+What is the network address for area 0?,1.1.1.0
+What is the subnet mask for the network 1.1.1.0?,0.0.0.255
+What is the area number for the networks 1.1.1.0 and 192.168.0.0?,0
+What is the network address for the network 192.168.0.0?,192.168.0.0
+What is the subnet mask for the network 192.168.0.0?,0.0.255.255
+Is there a network statement configured in OSPF?,Yes
+Which area does the network belong to?,41
+What is the command used to enable Iox?,iox
+Is IP forwarding enabled for non-IP protocols?,Yes
+"Are there multiple RP addresses configured for the ""actor"" VRF?","Yes, both 1.1.1.1 and 12.1.1.1 are RP addresses"
+"Is SSM (Source Specific Multicast) enabled by default on the ""actor"" VRF?",Yes
+Is HTTP server disabled?,Yes
+What is the authentication method for HTTP?,Local
+Is HTTPS server enabled?,Yes
+Are there any static routes configured in the routing table?,"Yes, three routes are configured:"
+Is NAT enabled on GigabitEthernet1?,"Yes, with overload mode"
+What is the SSH bulk mode size set to?,131072
+Is SCP server enabled?,Yes
+What is the first IP address range permitted in the MANAGEMENT access list?,10.4.95.0 0.0.0.127
+Is the IP address range 100.0.0.0 0.255.255.255 permitted in the MANAGEMENT access list?,Yes
+What is the third IP address range permitted in the MANAGEMENT access list?,172.26.0.0 0.0.255.255
+Are there any permit statements for IP addresses starting with 225.0.0.0 in the pim-group access list?,Yes
+What is the second IP address range permitted in the pim-group access list?,239.255.255.240 0.0.0.15
+What is the name of the first extended access list in this configuration?,NAT-ACL
+Who/what is allowed to pass through rule 10 of the NAT-ACL?,ip from 192.168.1.0/24 to any
+What is the destination address permitted by rule 10 of the TEST access list?,1.1.1.0/24
+Who/what is allowed to pass through rule 10 of both TEST and TEST2 access lists?,ip from 1.1.1.0/24 to any
+What is the destination address permitted by rule 10 of the Test (note capital 'T') access list?,host 1.1.1.1
+What is the SNMP community string?,devnet
+Is the SNMP access level set to read-only (RO)?,Yes
+What is the plane type mentioned in this running configuration?,control-plane
+What is the message displayed in the banner?,This is my banneer for all of my device
+What is the stop bits value for console lines?,1
+Is the exec-timeout set to 0 seconds for all lines?,Yes
+Are there any specific length settings for VTY lines?,No
+Which transport input protocol is allowed for VTY lines from 5-16?,SSH
+Is Call-Home enabled in this configuration?,
+What is the configured contact email address in call-home?,sch-smart-licensing@cisco.com
+What is the email address used as contact email address to send SCH notifications?,sch-smart-licensing@cisco.com
+"Is the ""CiscoTAC-1"" profile active?",Yes
+"What is the transport method for the destination in the ""CiscoTAC-1"" profile?",http
+What is the end of this running configuration indicating?,
+What is the total size of the current running configuration in bytes?,8151
+When was the last configuration change made?,14:13:46 UTC Wed Jun 26 2024 by admin
+Does the service log have timestamping enabled?,Yes
+Is call-home enabled as a service?,Yes
+What is the hostname of this device?,Cat8000V
+What is the boot system command set to?,bootflash:packages.conf
+Is logging to the console disabled?,Yes
+What is the authentication model being used?,AAA new-model
+What is the authorization method used for exec commands?,local
+Is AAA session-id common configured?,Yes
+What is the name of the VRF configuration?,actor
+Is IP multicast-routing enabled?,Yes
+Which VRF is IP multicast-routing associated with?,actor
+How is IP multicast-routing distributed in the network?,distributed
+Is IP domain lookup enabled?,No
+What is the IP domain name configured?,cisco.com
+What is the authentication behavior when a user logs in successfully?,log
+What type of enrollment method is used for the trustpoint TP-self-signed-3209586145?,Selfsigned
+What is the subject-name specified for the trustpoint TP-self-signed-3209586145?,cn=IOS-Self-Signed-Certificate-3209586145
+How does the revocation-check work for the trustpoint TP-self-signed-3209586145?,None
+What type of RSA key pair is used for the trustpoint TP-self-signed-3209586145?,RSakeypair
+What hashing algorithm is used for the trustpoint TP-self-signed-3209586145?,SHA256
+How does the enrollment process work for this trustpoint?,pkcs12
+What type of revocation check is used for this trustpoint?,crl
+What hashing algorithm is used for this trustpoint?,sha256
+Is there a certificate chain for TP-self-signed-3209586145?,Yes
+What is the type of certificate in the TP-self-signed-3209586145 chain?,Self-signed
+How many certificates are present in the TP-self-signed-3209586145 chain?,1 (certificate self-signed 01)
+Is there a certificate chain for SLA-TrustPoint?,Yes
+What is the type of the first certificate in the SLA-TrustPoint chain?,CA
+What is the product ID (pid) of the device?,C8000V
+What is the serial number (sn) of the device?,9OBXJHNNU5V
+How much memory is available as a free low-watermark processor value?,63709
+Is the password for username Gurjeet encrypted?,"Yes (indicated by ""secret"")"
+What is the password for username test123?,Not specified (only the hashed value is shown)
+What is the redundancy configuration present in this chunk of running configuration?,
+Is IP address configured for interface Loopback10?,No
+Is IP address configured on interface Loopback45?,No
+Is VRF forwarding enabled on interface Loopback99?,Yes
+Is PIM sparse mode enabled on interface Loopback99?,Yes
+Is OSPF network type point-to-point on interface Loopback99?,Yes
+Is unicast source verification enabled for interface GigabitEthernet1.500?,Yes
+What is the encapsulation type for interface GigabitEthernet1.501?,dot1Q 501
+What is the IP address configured on interface GigabitEthernet1.501?,10.255.101.1
+Is interface GigabitEthernet1.502 using dot1Q encapsulation?,Yes
+What is the VLAN ID for interface GigabitEthernet1.502?,502
+Does interface GigabitEthernet1.502 have an IP address configured?,Yes
+Is unicast source verification enabled on interface GigabitEthernet1.502?,Yes
+Is unicast source verification enabled for rx path on interface GigabitEthernet1.2000?,Yes
+Is the encapsulation method for interface GigabitEthernet1.2001 dot1Q?,Yes
+What is the inner VLAN ID configured on interface GigabitEthernet1.2001?,2001
+What is the outer VLAN ID configured on interface GigabitEthernet1.2001?,510
+Is unicast source verification enabled for reachable-via rx on interface GigabitEthernet1.2001?,Yes
+What is the encapsulation type used for interface GigabitEthernet1.2002?,dot1Q 511 second-dot1q 2002
+What is the IP address configured on interface GigabitEthernet1.2002?,10.255.202.1
+What is the subnet mask of the IP address configured on interface GigabitEthernet1.2002?,255.255.255.0
+Does IP verification for unicast sources use reachable-via rx for interface GigabitEthernet1.2002?,Yes
+Is there any encapsulation configured for interface GigabitEthernet1.2003?,Yes
+What type of encapsulation is used on interface GigabitEthernet1.2003?,dot1Q
+What is the second-dot1q value set to on interface GigabitEthernet1.2003?,2003
+What is the IP address configured for interface GigabitEthernet1.2003?,10.255.203.1
+What is the subnet mask of the IP address configured for interface GigabitEthernet1.2003?,255.255.255.0
+Is there any verification configuration set for unicast source on interface GigabitEthernet1.2003?,Yes
+Is the encapsulation type for interface GigabitEthernet1.2005 dot1Q?,Yes
+What is the second-dot1q value for interface GigabitEthernet1.2005?,2005
+Is IP verification enabled for unicast source reachable-via rx on interface GigabitEthernet1.2005?,Yes
+What is the AS number for EIGRP?,10
+What is the EIGRP process number configured?,20
+What is the autonomous system number in the address-family ipv4 unicast configuration?,45000
+What is the authentication mode configured for af-interface GigabitEthernet1?,hmac-sha-256 Tes
+What is the topology mode set to?,base
+Is the network 1.1.1.0 included in OSPF?,Yes
+In which area is the network 1.1.1.0 located?,0
+Is the network 192.168.0.0 included in OSPF?,Yes
+In which area is the network 192.168.0.0 located?,0
+Is there a network statement in the configuration?,Yes
+What is the IP address range of the network statement?,41.41.41.41 0.0.0.0
+What is the iox command in this running configuration?,None (iox does not have a direct answer)
+Is IP forwarding enabled with protocol nd?,Yes
+Is bidirectional PIM enabled?,Yes
+Are there multiple RP addresses configured in the actor VRF?,Yes
+What are the RP addresses configured in the actor VRF?,1.1.1.1 and 12.1.1.1
+Is PIM SSM mode enabled by default for the actor VRF?,Yes
+Are HTTP services disabled on this device?,No
+What is the authentication method used for HTTP access?,local
+Are HTTPS services enabled on this device?,Yes
+Is NAT enabled on GigabitEthernet1?,Yes
+How many routes are configured for 0.0.0.0/0?,2
+What is the next-hop IP address for route 172.16.22.22?,192.168.0.1
+What is the next-hop IP address for route 172.16.22.23?,192.168.0.1
+Is SSH bulk mode enabled?,Yes
+What is the name of the RSA keypair used for SSH connections?,ssh-key
+Is SCP server enabled on this device?,Yes
+What is the range permitted in rule 10 of the MANAGEMENT IP access list?,10.4.95.0 0.0.0.127
+How many rules are present in the MANAGEMENT IP access list?,"3 (rules 10, 20, and 30)"
+What is the range permitted in rule 20 of the MANAGEMENT IP access list?,100.0.0.0 0.255.255.255
+What is the range permitted in rule 30 of the MANAGEMENT IP access list?,172.26.0.0 0.0.255.255
+Is there a permit rule for any host with IP address 1.1.1.1 in an IP access list?,Yes
+Which IP access list has a permit rule for traffic from 192.168.1.0 to 192.168.1.255 and going anywhere (any)?,NAT-ACL
+Are there multiple IP access lists with the same permit rules (same source IP range and destination any)?,"Yes (TEST, TEST2)"
+What is the community string for SNMP?,devnet
+"What is the access level for the SNMP community ""devnet""?",RO
+What is the control plane configuration command used?,control-plane
+What is the stopbits value for the console (line con 0) configuration?,1
+Is there an exec-timeout set for the console (line con 0) configuration?,Yes
+How many seconds does the exec-timeout take effect after inactivity on the console (line con 0) configuration?,0
+Is there a transport input all option enabled for the vty line 0-4 configuration?,Yes
+Can SSH be used as a transport input for the vty line 5-16 configuration?,Yes
+Is Call-Home enabled?,Yes
+"Which transport method is used by destination for profile ""CiscoTAC-1""?",http
+Are there two NTP servers configured in this running configuration?,Yes
+What is the end command used for?,None provided in the text

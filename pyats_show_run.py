@@ -43,7 +43,7 @@ class Show_Run(aetest.Testcase):
 
     @aetest.test
     def capture_parse_command(self):
-        self.parsed_command = self.device.execute("show run")
+        self.parsed_command = self.device.execute("show run brief")
 
         with open('show_run.txt', 'w') as f:
             f.write(self.parsed_command)
