@@ -1,5 +1,6 @@
 import os
 import csv
+import json
 import torch
 import requests
 import transformers
@@ -40,7 +41,7 @@ else:
 
 # Run pyATS job to get the show_run.txt file
 def run_pyats_job():
-    job_status = os.system("pyats run job pyats_show_run_job.py")
+    job_status = os.system("pyats run job pyats_job.py")
     return "Job executed successfully" if job_status == 0 else "Job failed"
 
 def load_config(file_path='show_run.txt'):
@@ -49,6 +50,34 @@ def load_config(file_path='show_run.txt'):
             return file.read().split('!')
     except FileNotFoundError:
         return "Configuration file not found."
+
+def load_show_ip_interface_brief_json(file_path='show_ip_interface_brief.json'):
+    try:
+        with open(file_path, 'r') as file:
+            return json.load(file).get("interface", {})
+    except FileNotFoundError:
+        return "JSON configuration file not found."
+
+def load_show_interfaces_json(file_path='show_interfaces.json'):
+    try:
+        with open(file_path, 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return "JSON configuration file not found."
+
+def load_show_access_lists_json(file_path='show_access_lists.json'):
+    try:
+        with open(file_path, 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return "JSON configuration file not found."
+
+def load_show_ip_route_json(file_path='show_ip_route.json'):
+    try:
+        with open(file_path, 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return "JSON configuration file not found."
 
 def send_request(model, running_config_chunk):
     url = f"http://localhost:11434/api/generate"
@@ -102,6 +131,355 @@ def send_request(model, running_config_chunk):
         f"Format each question with a 'Q: ' prefix and each answer with an 'A: ' prefix on the next line. Only include questions that can be answered based on the given text. Do not include questions without answers.\n"
     )
 
+    data = {
+        "model": model,
+        "prompt": prompt,
+        "stream": False,
+        "keep_alive": 0
+    }
+
+    try:
+        response = requests.post(url, headers=headers, json=data)
+        response.raise_for_status()
+        results = response.json().get('response', '')
+        return results
+    except requests.exceptions.RequestException as e:
+        return f"Error: {e}"
+
+def send_show_ip_interface_brief_json_request(model, interface_name, interface_data):
+    url = f"http://localhost:11434/api/generate"
+    headers = {"Content-Type": "application/json"}
+
+    prompt = (
+        f"The following JSON data is from a Cisco IOS XE interface configuration. Generate randomized questions about the data to form a dataset being used to fine-tune a model. "
+        f"Only generate questions if the answer can be directly found within the JSON data provided. Do not generate questions if the answer is not explicitly present in the data. "
+        f"Include specific details from the JSON in the questions to make them clear and contextually accurate.\n\n"
+        f"For example, if you see a configuration like this:\n"
+        f"\"GigabitEthernet1\": {{\n"
+        f"  \"ip_address\": \"10.10.20.48\",\n"
+        f"  \"interface_is_ok\": \"YES\",\n"
+        f"  \"method\": \"NVRAM\",\n"
+        f"  \"status\": \"up\",\n"
+        f"  \"protocol\": \"up\"\n"
+        f"}},\n"
+        f"Make sure your questions are like this:\n"
+        f"Q: What is the IP address of GigabitEthernet1?\n"
+        f"A: 10.10.20.48\n"
+        f"Q: Is the interface GigabitEthernet1 ok?\n"
+        f"A: YES\n"
+        f"Q: What is the status of GigabitEthernet1?\n"
+        f"A: up\n"
+        f"Q: What is the method for GigabitEthernet1?\n"
+        f"A: NVRAM\n"
+        f"Q: What is the protocol status of Loopback0?\n"
+        f"A: up\n"
+        f"Q: What is the IP address of Loopback0?\n"
+        f"A: 10.0.0.1\n\n"
+        f"Now generate questions and answers for the following JSON data:\n"
+        f"---JSON Configuration Data---\n{json.dumps({interface_name: interface_data}, indent=2)}\n"
+        f"Format each question with a 'Q: ' prefix and each answer with an 'A: ' prefix on the next line. Only include questions that can be answered based on the given data. Do not include questions without answers.\n"
+    )
+
+    data = {
+        "model": model,
+        "prompt": prompt,
+        "stream": False,
+        "keep_alive": 0
+    }
+
+    try:
+        response = requests.post(url, headers=headers, json=data)
+        response.raise_for_status()
+        results = response.json().get('response', '')
+        return results
+    except requests.exceptions.RequestException as e:
+        return f"Error: {e}"
+
+def send_show_interfaces_json_request(model, interface_name, interface_data):
+    url = f"http://localhost:11434/api/generate"
+    headers = {"Content-Type": "application/json"}
+
+    prompt = (
+        f"The following JSON data is from a Cisco IOS XE interface configuration. Generate randomized questions about the data to form a dataset being used to fine-tune a model. "
+        f"Only generate questions if the answer can be directly found within the JSON data provided. Do not generate questions if the answer is not explicitly present in the data. "
+        f"Include specific details from the JSON in the questions to make them clear and contextually accurate.\n\n"
+        f"For example, if you see a configuration like this:\n"
+        f"\"GigabitEthernet1\": {{\n"
+        f"  \"port_channel\": {{\n"
+        f"    \"port_channel_member\": false\n"
+        f"  }},\n"
+        f"  \"is_deleted\": false,\n"
+        f"  \"enabled\": true,\n"
+        f"  \"line_protocol\": \"up\",\n"
+        f"  \"oper_status\": \"up\",\n"
+        f"  \"type\": \"vNIC\",\n"
+        f"  \"mac_address\": \"0050.56bf.bfe7\",\n"
+        f"  \"phys_address\": \"0050.56bf.bfe7\",\n"
+        f"  \"description\": \"MANAGEMENT INTERFACE - DON'T TOUCH ME\",\n"
+        f"  \"ipv4\": {{\n"
+        f"    \"10.10.20.48/24\": {{\n"
+        f"      \"ip\": \"10.10.20.48\",\n"
+        f"      \"prefix_length\": \"24\"\n"
+        f"    }}\n"
+        f"  }},\n"
+        f"  \"delay\": 10,\n"
+        f"  \"mtu\": 1500,\n"
+        f"  \"bandwidth\": 1000000,\n"
+        f"  \"reliability\": \"255/255\",\n"
+        f"  \"txload\": \"1/255\",\n"
+        f"  \"rxload\": \"1/255\",\n"
+        f"  \"encapsulations\": {{\n"
+        f"    \"encapsulation\": \"arpa\"\n"
+        f"  }},\n"
+        f"  \"keepalive\": 10,\n"
+        f"  \"duplex_mode\": \"full\",\n"
+        f"  \"port_speed\": \"1000mbps\",\n"
+        f"  \"link_type\": \"auto\",\n"
+        f"  \"auto_negotiate\": true,\n"
+        f"  \"media_type\": \"Virtual\",\n"
+        f"  \"flow_control\": {{\n"
+        f"    \"receive\": false,\n"
+        f"    \"send\": false\n"
+        f"  }},\n"
+        f"  \"arp_type\": \"arpa\",\n"
+        f"  \"arp_timeout\": \"04:00:00\",\n"
+        f"  \"last_input\": \"00:00:00\",\n"
+        f"  \"last_output\": \"00:00:00\",\n"
+        f"  \"output_hang\": \"never\",\n"
+        f"  \"queues\": {{\n"
+        f"    \"input_queue_size\": 0,\n"
+        f"    \"input_queue_max\": 375,\n"
+        f"    \"input_queue_drops\": 0,\n"
+        f"    \"input_queue_flushes\": 0,\n"
+        f"    \"total_output_drop\": 0,\n"
+        f"    \"queue_strategy\": \"fifo\",\n"
+        f"    \"output_queue_size\": 0,\n"
+        f"    \"output_queue_max\": 40\n"
+        f"  }},\n"
+        f"  \"counters\": {{\n"
+        f"    \"rate\": {{\n"
+        f"      \"load_interval\": 300,\n"
+        f"      \"in_rate\": 4000,\n"
+        f"      \"in_rate_pkts\": 3,\n"
+        f"      \"out_rate\": 3000,\n"
+        f"      \"out_rate_pkts\": 3\n"
+        f"    }},\n"
+        f"    \"last_clear\": \"never\",\n"
+        f"    \"in_pkts\": 1879,\n"
+        f"    \"in_octets\": 249491,\n"
+        f"    \"in_no_buffer\": 0,\n"
+        f"    \"in_multicast_pkts\": 0,\n"
+        f"    \"in_broadcast_pkts\": 0,\n"
+        f"    \"in_runts\": 0,\n"
+        f"    \"in_giants\": 0,\n"
+        f"    \"in_throttles\": 0,\n"
+        f"    \"in_errors\": 0,\n"
+        f"    \"in_crc_errors\": 0,\n"
+        f"    \"in_frame\": 0,\n"
+        f"    \"in_overrun\": 0,\n"
+        f"    \"in_ignored\": 0,\n"
+        f"    \"in_watchdog\": 0,\n"
+        f"    \"in_mac_pause_frames\": 0,\n"
+        f"    \"out_pkts\": 1980,\n"
+        f"    \"out_octets\": 693666,\n"
+        f"    \"out_underruns\": 0,\n"
+        f"    \"out_broadcast_pkts\": 0,\n"
+        f"    \"out_multicast_pkts\": 0,\n"
+        f"    \"out_errors\": 0,\n"
+        f"    \"out_interface_resets\": 0,\n"
+        f"    \"out_collision\": 0,\n"
+        f"    \"out_unknown_protocl_drops\": 0,\n"
+        f"    \"out_babble\": 0,\n"
+        f"    \"out_late_collision\": 0,\n"
+        f"    \"out_deferred\": 0,\n"
+        f"    \"out_lost_carrier\": 0,\n"
+        f"    \"out_no_carrier\": 0,\n"
+        f"    \"out_mac_pause_frames\": 0,\n"
+        f"    \"out_buffer_failure\": 0,\n"
+        f"    \"out_buffers_swapped\": 0\n"
+        f"  }}\n"
+        f"}},\n"
+        f"Make sure your questions are like this:\n"
+        f"Q: What is the IP address of GigabitEthernet1?\n"
+        f"A: 10.10.20.48\n"
+        f"Q: Is the interface GigabitEthernet1 ok?\n"
+        f"A: YES\n"
+        f"Q: What is the status of GigabitEthernet1?\n"
+        f"A: up\n"
+        f"Q: What is the method for GigabitEthernet1?\n"
+        f"A: NVRAM\n"
+        f"Q: What is the MAC address of GigabitEthernet1?\n"
+        f"A: 0050.56bf.bfe7\n"
+        f"Q: What is the MTU of GigabitEthernet1?\n"
+        f"A: 1500\n"
+        f"Q: What is the bandwidth of GigabitEthernet1?\n"
+        f"A: 1000000\n"
+        f"Q: What is the duplex mode of GigabitEthernet1?\n"
+        f"A: full\n"
+        f"Q: What is the port speed of GigabitEthernet1?\n"
+        f"A: 1000mbps\n"
+        f"Q: What is the link type of GigabitEthernet1?\n"
+        f"A: auto\n"
+        f"Q: What is the ARP timeout for GigabitEthernet1?\n"
+        f"A: 04:00:00\n\n"
+        f"Now generate questions and answers for the following JSON data:\n"
+        f"---JSON Configuration Data---\n{json.dumps({interface_name: interface_data}, indent=2)}\n"
+        f"Format each question with a 'Q: ' prefix and each answer with an 'A: ' prefix on the next line. Only include questions that can be answered based on the given data. Do not include questions without answers.\n"
+    )
+
+    data = {
+        "model": model,
+        "prompt": prompt,
+        "stream": False,
+        "keep_alive": 0
+    }
+
+    try:
+        response = requests.post(url, headers=headers, json=data)
+        response.raise_for_status()
+        results = response.json().get('response', '')
+        return results
+    except requests.exceptions.RequestException as e:
+        return f"Error: {e}"
+
+def send_show_access_lists_json_request(model, acl_name, acl_data):
+    url = f"http://localhost:11434/api/generate"
+    headers = {"Content-Type": "application/json"}
+
+    prompt = (
+        f"The following JSON data is from a Cisco IOS XE access list configuration. Generate randomized questions about the data to form a dataset being used to fine-tune a model. "
+        f"Only generate questions if the answer can be directly found within the JSON data provided. Do not generate questions if the answer is not explicitly present in the data. "
+        f"Include specific details from the JSON in the questions to make them clear and contextually accurate.\n\n"
+        f"For example, if you see a configuration like this:\n"
+        f"\"NAT-ACL\": {{\n"
+        f"  \"name\": \"NAT-ACL\",\n"
+        f"  \"type\": \"ipv4-acl-type\",\n"
+        f"  \"acl_type\": \"extended\",\n"
+        f"  \"aces\": {{\n"
+        f"    \"10\": {{\n"
+        f"      \"name\": \"10\",\n"
+        f"      \"actions\": {{\n"
+        f"        \"forwarding\": \"permit\",\n"
+        f"        \"logging\": \"log-none\"\n"
+        f"      }},\n"
+        f"      \"matches\": {{\n"
+        f"        \"l3\": {{\n"
+        f"          \"ipv4\": {{\n"
+        f"            \"protocol\": \"ipv4\",\n"
+        f"            \"source_network\": {{\n"
+        f"              \"192.168.1.0 0.0.0.255\": {{\n"
+        f"                \"source_network\": \"192.168.1.0 0.0.0.255\"\n"
+        f"              }}\n"
+        f"            }},\n"
+        f"            \"destination_network\": {{\n"
+        f"              \"any\": {{\n"
+        f"                \"destination_network\": \"any\"\n"
+        f"              }}\n"
+        f"            }}\n"
+        f"          }}\n"
+        f"        }},\n"
+        f"        \"l4\": {{\n"
+        f"          \"ipv4\": {{\n"
+        f"            \"established\": false\n"
+        f"          }}\n"
+        f"        }}\n"
+        f"      }}\n"
+        f"    }}\n"
+        f"  }}\n"
+        f"}},\n"
+        f"Make sure your questions are like this:\n"
+        f"Q: What is the name of the access list?\n"
+        f"A: NAT-ACL\n"
+        f"Q: What is the type of the access list?\n"
+        f"A: ipv4-acl-type\n"
+        f"Q: What is the ACL type of NAT-ACL?\n"
+        f"A: extended\n"
+        f"Q: What is the forwarding action for ACE 10 in NAT-ACL?\n"
+        f"A: permit\n"
+        f"Q: What is the logging action for ACE 10 in NAT-ACL?\n"
+        f"A: log-none\n"
+        f"Q: What is the protocol used in ACE 10 of NAT-ACL?\n"
+        f"A: ipv4\n"
+        f"Q: What is the source network in ACE 10 of NAT-ACL?\n"
+        f"A: 192.168.1.0 0.0.0.255\n"
+        f"Q: What is the destination network in ACE 10 of NAT-ACL?\n"
+        f"A: any\n"
+        f"Q: Is the IPv4 protocol established in ACE 10 of NAT-ACL?\n"
+        f"A: false\n\n"
+        f"Now generate questions and answers for the following JSON data:\n"
+        f"---JSON Configuration Data---\n{json.dumps({acl_name: acl_data}, indent=2)}\n"
+        f"Format each question with a 'Q: ' prefix and each answer with an 'A: ' prefix on the next line. Only include questions that can be answered based on the given data. Do not include questions without answers.\n"
+    )
+
+    data = {
+        "model": model,
+        "prompt": prompt,
+        "stream": False,
+        "keep_alive": 0
+    }
+
+    try:
+        response = requests.post(url, headers=headers, json=data)
+        response.raise_for_status()
+        results = response.json().get('response', '')
+        return results
+    except requests.exceptions.RequestException as e:
+        return f"Error: {e}"
+
+def send_show_ip_route_json_request(model, route_name, route_data):
+    url = f"http://localhost:11434/api/generate"
+    headers = {"Content-Type": "application/json"}
+
+    prompt = (
+        f"The following JSON data is from a Cisco IOS XE IP route configuration. Generate randomized questions about the data to form a dataset being used to fine-tune a model. "
+        f"Only generate questions if the answer can be directly found within the JSON data provided. Do not generate questions if the answer is not explicitly present in the data. "
+        f"Include specific details from the JSON in the questions to make them clear and contextually accurate.\n\n"
+        f"For example, if you see a configuration like this:\n"
+        f"\"0.0.0.0/0\": {{\n"
+        f"  \"route\": \"0.0.0.0/0\",\n"
+        f"  \"active\": true,\n"
+        f"  \"metric\": 0,\n"
+        f"  \"route_preference\": 1,\n"
+        f"  \"source_protocol_codes\": \"S*\",\n"
+        f"  \"source_protocol\": \"static\",\n"
+        f"  \"next_hop\": {{\n"
+        f"    \"next_hop_list\": {{\n"
+        f"      \"1\": {{\n"
+        f"        \"index\": 1,\n"
+        f"        \"next_hop\": \"10.10.20.254\",\n"
+        f"        \"outgoing_interface\": \"GigabitEthernet1\"\n"
+        f"      }}\n"
+        f"    }}\n"
+        f"  }}\n"
+        f"}},\n"
+        f"Make sure your questions are like this:\n"
+        f"Q: What is the route for 0.0.0.0/0?\n"
+        f"A: 0.0.0.0/0\n"
+        f"Q: Is the route 0.0.0.0/0 active?\n"
+        f"A: true\n"
+        f"Q: What is the metric for the route 0.0.0.0/0?\n"
+        f"A: 0\n"
+        f"Q: What is the route preference for 0.0.0.0/0?\n"
+        f"A: 1\n"
+        f"Q: What are the source protocol codes for 0.0.0.0/0?\n"
+        f"A: S*\n"
+        f"Q: What is the source protocol for 0.0.0.0/0?\n"
+        f"A: static\n"
+        f"Q: What is the next hop IP address for 0.0.0.0/0?\n"
+        f"A: 10.10.20.254\n"
+        f"Q: What is the outgoing interface for the next hop 10.10.20.254 in 0.0.0.0/0?\n"
+        f"A: GigabitEthernet1\n\n"
+        f"If the route is 0.0.0.0/0, treat it as the default route and generate questions like:\n"
+        f"Q: What is my default route?\n"
+        f"A: 0.0.0.0/0\n"
+        f"Q: What is my default route next hop?\n"
+        f"A: 10.10.20.254\n"
+        f"Q: What outgoing interface does my default route use?\n"
+        f"A: GigabitEthernet1\n\n"
+        f"Now generate questions and answers for the following JSON data:\n"
+        f"---JSON Configuration Data---\n{json.dumps({route_name: route_data}, indent=2)}\n"
+        f"Format each question with a 'Q: ' prefix and each answer with an 'A: ' prefix on the next line. Only include questions that can be answered based on the given data. Do not include questions without answers.\n"
+    )
 
     data = {
         "model": model,
@@ -202,8 +580,100 @@ def generate_dataset(num_iterations=5):
         print(running_config_chunks)
         return
     
+    show_ip_interface_brief_json = load_show_ip_interface_brief_json()
+    if show_ip_interface_brief_json == "JSON configuration file not found.":
+        print(show_ip_interface_brief_json)
+        return
+    
+    show_interfaces_json = load_show_interfaces_json()
+    if show_interfaces_json == "JSON configuration file not found.":
+        print(show_interfaces_json)
+        return
+        
+    show_access_lists_json = load_show_access_lists_json()
+    if show_access_lists_json == "JSON configuration file not found.":
+        print(show_access_lists_json)
+        return
+
+    show_ip_route_json = load_show_ip_route_json()
+    if show_ip_route_json == "JSON configuration file not found.":
+        print(show_ip_route_json)
+        return
+    
     models = ["llama3", "gemma2"]
     for iteration in range(num_iterations):
+
+        # Process show ip interface brief
+        for interface_name, interface_data in show_ip_interface_brief_json.items():
+            if interface_data:  # Skip empty interfaces
+                for model in models:
+                    result = send_show_ip_interface_brief_json_request(model, interface_name, interface_data)
+                    if not result:
+                        print(f"No response or an error occurred while fetching the model response for interface {interface_name} in iteration {iteration+1}.")
+                        continue  # Skip to the next iteration if no response
+            
+                    formatted_output = format_qa_pairs(result)
+                    if not formatted_output:
+                        print(f"No formatted output generated for interface {interface_name} in iteration {iteration+1}.")
+                        continue
+            
+                    save_to_csv(formatted_output)
+                    print(f"Batch of data appended to dataset for interface {interface_name} in iteration {iteration+1}.")
+
+        # Process show interfaces
+        for interface_name, interface_data in show_interfaces_json.items():
+            if interface_data:  # Skip empty interfaces
+                for model in models:
+                    result = send_show_interfaces_json_request(model, interface_name, interface_data)
+                    if not result:
+                        print(f"No response or an error occurred while fetching the model response for interface {interface_name} in iteration {iteration+1}.")
+                        continue  # Skip to the next iteration if no response
+
+                    formatted_output = format_qa_pairs(result)
+                    if not formatted_output:
+                        print(f"No formatted output generated for interface {interface_name} in iteration {iteration+1}.")
+                        continue
+
+                    save_to_csv(formatted_output)
+                    print(f"Batch of data appended to dataset for interface {interface_name} in iteration {iteration+1}.")
+
+        #Process ACLs
+        for acl_name, acl_data in show_access_lists_json.items():
+            if acl_data:  # Skip empty ACLs
+                for model in models:
+                    result = send_show_access_lists_json_request(model, acl_name, acl_data)
+                    if not result:
+                        print(f"No response or an error occurred while fetching the model response for ACL {acl_name} in iteration {iteration+1}.")
+                        continue  # Skip to the next iteration if no response
+                
+                    formatted_output = format_qa_pairs(result)
+                    if not formatted_output:
+                        print(f"No formatted output generated for ACL {acl_name} in iteration {iteration+1}.")
+                        continue
+                
+                    save_to_csv(formatted_output)
+                    print(f"Batch of data appended to dataset for ACL {acl_name} in iteration {iteration+1}.")
+
+        #Process IP Routes
+        for vrf, vrf_data in show_ip_route_json["vrf"].items():
+            for af, af_data in vrf_data["address_family"].items():
+                for route_name, route_data in af_data["routes"].items():
+                    if route_data:  # Skip empty routes
+                        for model in models:
+                            result = send_show_ip_route_json_request(model, route_name, route_data)
+                            if not result:
+                                print(f"No response or an error occurred while fetching the model response for route {route_name} in iteration {iteration+1}.")
+                                continue  # Skip to the next iteration if no response
+                            
+                            formatted_output = format_qa_pairs(result)
+                            if not formatted_output:
+                                print(f"No formatted output generated for route {route_name} in iteration {iteration+1}.")
+                                continue
+                            
+                            save_to_csv(formatted_output)
+                            print(f"Batch of data appended to dataset for route {route_name} in iteration {iteration+1}.")
+
+        #Process running config chunks
         for i, chunk in enumerate(running_config_chunks):
             if chunk.strip():  # Skip empty chunks
                 for model in models:
@@ -211,16 +681,15 @@ def generate_dataset(num_iterations=5):
                     if not result:
                         print(f"No response or an error occurred while fetching the model response for chunk {i+1} in iteration {iteration+1}.")
                         continue  # Skip to the next iteration if no response
-                
                     formatted_output = format_qa_pairs(result)
                     if not formatted_output:
                         print(f"No formatted output generated for chunk {i+1} in iteration {iteration+1}.")
                         continue
-                
                     save_to_csv(formatted_output)
                     print(f"Batch of data appended to dataset for chunk {i+1} in iteration {iteration+1}.")
 
 # Call the function to start the process
+run_pyats_job()
 generate_dataset()
 
 # Load the training examples from the file
